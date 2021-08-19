@@ -1,4 +1,4 @@
-import java.util.Scanner;
+// import java.util.Scanner;
  
 class Add{
     int total=0;
@@ -10,13 +10,17 @@ class Add{
 
             String[] arr=str.split(",");
 
+            if(arr.length>2){
+                System.out.println("Maximum Number allowed are 2 .");
+            }
+            else{
             for(int i=0;i<arr.length;i++){
-                // System.out.println(arr[i]+" abcd");
                 int a=Integer.parseInt(arr[i]);
                 total+=a;
                 // System.out.println(a);
+            }              
+            System.out.println("Total is : " + total);
             }
-                System.out.println(total);
             }
         }
 }
