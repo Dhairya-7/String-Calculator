@@ -18,15 +18,17 @@ class StringCalcTest {
 	void addTwoNumber() {
 		assertEquals(s.calc("1,2"),3);
 	}
-
 	@Test
 	void addUnknownAmountOfNumber() {
 		assertEquals(s.calc("1,2,3,4,5"),15);
 	}
-	
 	@Test
-	void NegativeNumberException() {
+	void negativeNumberException() {
 		assertEquals(s.calc("-1,2"),0);
+	}
+	@Test
+	void newLineDelimiter() {
+		assertEquals(s.calc("1\n2,3"),6);
 	}
 
 }

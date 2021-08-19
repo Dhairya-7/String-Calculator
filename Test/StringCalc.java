@@ -10,7 +10,7 @@ public class StringCalc {
 		
 		if(!string.isEmpty())
 		{				
-			String [] arr =string.split(",");
+			String [] arr =string.split("[,\\n]");
 		
 			for(int i=0;i<arr.length;i++)	
 			{
@@ -22,6 +22,7 @@ public class StringCalc {
                 	}
                 	catch(negativeNumberException e) {
                 		System.out.println( e.getMessage());
+                		return 0;
                 	}
                 }
                 total+=a;
