@@ -7,13 +7,23 @@ public class StringCalc {
 	}	
 	public int calc(String string) {
 		int total=0;
+		String delim="[,\\n]";
 		
 		if(!string.isEmpty())
 		{				
-			String [] arr =string.split("[,\\n]");
+			if(string.startsWith("//")) {
+				String newDelim=string.substring(string.indexOf("//")+2,string.indexOf("\n"));
+                string=string.substring(string.indexOf("\n")+1,string.length());
+                delim=newDelim;
+			}
+			
+			String [] arr =string.split(delim);
 		
 			for(int i=0;i<arr.length;i++)	
 			{
+				if(arr[i].isEmpty()){
+                    continue;
+                }
                 int a=Integer.parseInt(arr[i]);
                 if(a<0) {
                 	try{
