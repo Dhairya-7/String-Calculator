@@ -24,7 +24,13 @@ class StringCalcTest {
 	}
 	@Test
 	void negativeNumberException() {
-		assertEquals(s.calc("-1,2"),0);
+//		assertEquals(s.calc("-1,2"),0);
+		try {
+			s.calc("-1,2");			
+		}
+		catch(IllegalArgumentException e) {
+			e.getMessage();
+		}
 	}
 	@Test
 	void newLineDelimiter() {
@@ -32,7 +38,7 @@ class StringCalcTest {
 	}
 	@Test
 	void customDelimiter() {
-		assertEquals(s.calc("//;\n1;2"),3);
+		assertEquals(s.calc("//;\\n1;2"),3);
 	}
 	@Test
 	void numberGreaterThan1000() {
@@ -40,10 +46,10 @@ class StringCalcTest {
 	}
 	@Test
 	void anyLengthDelimiter() {
-		assertEquals(s.calc("//[;;]\n1;;2"),3);
+		assertEquals(s.calc("//[;;]\\n1;;2"),3);
 	}
-//	@Test
-//	void moreThanOneCustomDelimiters() {
-//		assertEquals(s.calc("//;!\n1;2!3"),6);
-//	}
+	@Test
+	void moreThanOneCustomDelimiters() {
+		assertEquals(s.calc("//[;][*]\\n1;2*3"),6);
+	}
 }
