@@ -1,16 +1,44 @@
+	
  class Add{
+     public class negativeNumberException extends Exception{
+		negativeNumberException(String msg){
+			super(msg);
+		}
+	}
+
+            private static String getBetweenString(String str,String startingString,String endingString){
+
+
+                    int endIndex = str.indexOf(endingString);
+                    // System.out.println("Length");
+                    if(endingString.length()==0) endIndex=str.length();
+                    int startIndex =str.indexOf(startingString)+startingString.length();
+                    // System.out.println(endIndex +" "+ str + " "+startIndex);
+
+                    String newDelim=str.substring(startIndex,endIndex);
+                    return newDelim;
+
+		}
+		
     int total=0;
         Add(String str){
-            String delim="[,\\n]";
+            String delim=",\n";
 
             if(!str.isEmpty()){
 
                 if(str.startsWith("//")){
-                    String newDelim=str.substring(str.indexOf("//")+2,str.indexOf("\n"));
-                    str=str.substring(str.indexOf("\n")+1,str.length());
-                    delim=newDelim;
+                    if(str.startsWith("//[")){
+                        delim= getBetweenString(str,"//[","]\\n");
+                        str =  getBetweenString(str,"]\\n","");
+                    }
+                    else{
+                        // String newDelim=str.substring(str.indexOf("//")+2,str.indexOf("\n"));
+                        // str=str.substring(str.indexOf("\n")+1,str.length());
+                        // delim=newDelim;
+                        delim=getBetweenString(str, "//", "\\n");
+                        str=getBetweenString(str, "\\n", "");
+                    }
                 }
-                System.out.println("Delimiter is : " + delim);
 
                 String[] arr=str.split(delim) ;
             
@@ -19,9 +47,22 @@
                     continue;
                 }
                 int a=Integer.parseInt(arr[i]);
+                if(a<0){
+                    try{
+                        throw new negativeNumberException("Negatives not Allowed");
+                    }
+                
+                catch(Exception e){
+                    System.out.println(e.getMessage());
+                }
+                }
+                else if(a>=1000){
+                    continue;
+                }
                 total+=a;
                 // System.out.println(a);
-            }              
+            }  
+
             System.out.println("Total is : " + total);
             
             }
@@ -36,8 +77,8 @@ public class StringCalculator
 {
     public static void main(String[] args)
     {
-        String str = "//;\n1;2";
-        // String str="1\n2,3";
+        String str = "//;\\n1;2;4;4;5;5;5";
+        // String str="1000,2";
         // System.out.println(str);
         Add a=new Add(str); 
     }

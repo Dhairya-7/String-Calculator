@@ -34,6 +34,16 @@ class StringCalcTest {
 	void customDelimiter() {
 		assertEquals(s.calc("//;\n1;2"),3);
 	}
-
-	
+	@Test
+	void numberGreaterThan1000() {
+		assertEquals(s.calc("1000,1"),1);
+	}
+	@Test
+	void anyLengthDelimiter() {
+		assertEquals(s.calc("//[;;]\n1;;2"),3);
+	}
+//	@Test
+//	void moreThanOneCustomDelimiters() {
+//		assertEquals(s.calc("//;!\n1;2!3"),6);
+//	}
 }
